@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             if(state is AuthFailure){
-              showSnakBar(context, state.message);
+              
             }
             if(state is AuthLoading){
               return const Loader();
