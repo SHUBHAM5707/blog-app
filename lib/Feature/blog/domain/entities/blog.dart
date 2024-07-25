@@ -9,16 +9,16 @@ class Blog {
   final String imageUrl;
   final List<String> topics;
   final DateTime updatesAt;
+  final String? posterName;
 
-  Blog(
-      {required this.id,
-      required this.posterId,
-      required this.title,
-      required this.content,
-      required this.imageUrl,
-      required this.topics,
-      required this.updatesAt
-    });
-
-  
+  Blog({
+    required this.id,
+    required this.posterId,
+    required this.title,
+    required this.content,
+    required this.imageUrl,
+    required this.topics,
+    required this.updatesAt,
+    this.posterName,
+  });  
 }

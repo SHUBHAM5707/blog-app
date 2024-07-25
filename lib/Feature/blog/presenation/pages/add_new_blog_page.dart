@@ -11,7 +11,6 @@ import 'package:blog/core/utils/show_snakbar.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AddNewBlogPage extends StatefulWidget {
   static route() =>
@@ -78,7 +77,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
         listener: (context, state) {
           if (state is BlogFailure) {
             showSnakBar(context, state.error);
-          } else if (state is BlogSuccess) {
+          } else if (state is BlogsUploadSuccess) {
             Navigator.pushAndRemoveUntil(
               context, 
               BlogPage.route(), 
@@ -121,10 +120,10 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                               radius: const Radius.circular(10),
                               borderType: BorderType.RRect,
                               strokeCap: StrokeCap.round,
-                              child: Container(
+                              child: const SizedBox(
                                 height: 150,
                                 width: double.infinity,
-                                child: const Column(
+                                child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(

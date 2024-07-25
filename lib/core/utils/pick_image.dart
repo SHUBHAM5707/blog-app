@@ -13,4 +13,5 @@ Future<File?> pickImage() async {
   } catch (e) {
     return null;
   }
+  return null;
 }
