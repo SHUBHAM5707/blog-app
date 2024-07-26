@@ -3,8 +3,10 @@ import 'package:blog/Feature/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:blog/Feature/auth/presentation/pages/auth_gradient_button.dart';
 import 'package:blog/Feature/auth/presentation/pages/signup_page.dart';
 import 'package:blog/Feature/auth/presentation/widgets/auh_field.dart';
+import 'package:blog/Feature/blog/presenation/pages/blog_page.dart';
 import 'package:blog/core/comman/widgets/loader.dart';
 import 'package:blog/core/theme/app_pallete.dart';
+import 'package:blog/core/utils/show_snakbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,10 +38,15 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(12.0),
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
-            if(state is AuthFailure){
-              
+            if (state is AuthFailure) {
+              showSnakBar(context, state.message);
+            } else if (state is AuthSuccess) {
+              Navigator.push(
+                context,
+                BlogPage.route(),
+              );
             }
-            if(state is AuthLoading){
+            if (state is AuthLoading) {
               return const Loader();
             }
             return Form(

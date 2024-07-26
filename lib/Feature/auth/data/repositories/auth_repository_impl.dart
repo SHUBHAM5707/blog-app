@@ -6,7 +6,6 @@ import 'package:blog/core/error/exceptions.dart';
 import 'package:blog/core/error/failures.dart';
 import 'package:blog/core/network/connection_cheaker.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:supabase_flutter/supabase_flutter.dart' as sb;
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
@@ -69,8 +68,6 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = await fn();
 
       return right(user);
-    } on sb.AuthException catch (e) {
-      return left(Failure(e.message));
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

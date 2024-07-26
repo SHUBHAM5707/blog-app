@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:blog/Feature/blog/data/model/blog_model.dart';
 import 'package:blog/core/error/exceptions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -24,6 +23,8 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
           await supabaseClient.from('blogs').insert(blog.toJson()).select();
 
       return BlogModel.fromJson(blogData.first);
+    } on PostgrestException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -41,6 +42,8 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
           );
 
       return supabaseClient.storage.from('blog_images').getPublicUrl(blog.id);
+    } on StorageException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -55,6 +58,8 @@ class BlogRemoteDataSourceImpl implements BlogRemoteDataSource {
         posterName: blog['profiles']['posterName']
       )).toList();
 
+    } on PostgrestException catch (e) {
+      throw ServerException(e.message);
     } catch (e) {
       throw ServerException(e.toString());
     }

@@ -3,6 +3,7 @@ import 'package:blog/Feature/auth/presentation/bloc/auth_bloc_bloc.dart';
 import 'package:blog/Feature/auth/presentation/pages/auth_gradient_button.dart';
 import 'package:blog/Feature/auth/presentation/pages/login_page.dart';
 import 'package:blog/Feature/auth/presentation/widgets/auh_field.dart';
+import 'package:blog/Feature/blog/presenation/pages/blog_page.dart';
 import 'package:blog/core/comman/widgets/loader.dart';
 import 'package:blog/core/theme/app_pallete.dart';
 import 'package:blog/core/utils/show_snakbar.dart';
@@ -41,6 +42,11 @@ class _SignUpPageState extends State<SignUpPage> {
           listener: (context, state) {
             if(state is AuthFailure){
               showSnakBar(context, state.message);
+            }else if (state is AuthSuccess) {
+              Navigator.push(
+                context,
+                BlogPage.route(),
+              );
             }
           },
           builder: (context, state) {
